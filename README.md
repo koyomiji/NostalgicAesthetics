@@ -1,6 +1,8 @@
-# MobGriefingExtended for Forge 1.7.10
+# NostalgicAesthetics for Forge 1.7.10
 
-Provides finer control over mobGriefing rules.
+An attempt to recreate aesthetics of pre-1.7 Minecraft on 1.7.10.
+
+![](screenshots/screenshot1.png)
 
 ## Requirements
 
@@ -8,7 +10,7 @@ Provides finer control over mobGriefing rules.
 
 ## Installation
 
-1. Goto [releases](https://github.com/koyomiji/MobGriefingExtended/releases) and download the latest jar file.
+1. Goto [releases](https://github.com/koyomiji/NostalgicAesthetics/releases) and download the latest jar file.
 2. Place the jar file into your `mods` folder.
 
 ## License

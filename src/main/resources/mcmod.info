@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "nostalgicaesthetics",
+    "name": "NostalgicAesthetics",
+    "description": "An attempt to recreate aesthetics of pre-1.7 Minecraft on 1.7.10.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/koyomiji/NostalgicAesthetics",
+    "updateUrl": "",
+    "authorList": [
+      "k0michi"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

@@ -1,7 +1,9 @@
 package com.koyomiji.nostalgicaesthetics.coremod;
 
+import com.koyomiji.nostalgicaesthetics.setup.LanguageMap;
 import com.koyomiji.nostalgicaesthetics.setup.AssetFetcher;
 import com.koyomiji.nostalgicaesthetics.setup.AssetIdentifier;
+import com.koyomiji.nostalgicaesthetics.setup.IOHelper;
 import cpw.mods.fml.relauncher.IFMLCallHook;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
@@ -11,8 +13,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
@@ -105,6 +111,25 @@ public class NostalgicAestheticsSetup implements IFMLCallHook {
             zos.putNextEntry(new ZipEntry("assets/nostalgicaesthetics/textures/misc/dial.png"));
             ImageIO.write(image, "PNG", zos);
             zos.closeEntry();
+          }
+
+          Enumeration<JarEntry> entries = client164Jar.entries();
+
+          while (entries.hasMoreElements()) {
+            JarEntry entry = entries.nextElement();
+            String name = entry.getName();
+
+            if (name.startsWith("lang/") && name.endsWith(".lang")) {
+              try (InputStream is = client164Jar.getInputStream(entry)) {
+                String content = new String(IOHelper.readAllBytes(is), StandardCharsets.UTF_8);
+                Map<String, String> map = LanguageMap.parse(content);
+                Map<String, String> newMap = new HashMap<>();
+                newMap.put("tile.flower2.poppy.name", map.get("tile.rose.name"));
+                zos.putNextEntry(new ZipEntry("assets/nostalgicaesthetics/lang/" + name.substring(name.lastIndexOf('/') + 1)));
+                zos.write(LanguageMap.stringify(newMap).getBytes(StandardCharsets.UTF_8));
+                zos.closeEntry();
+              }
+            }
           }
         }
       } catch (IOException e) {
